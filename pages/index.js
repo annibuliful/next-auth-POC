@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/auth";
 
 export default function Home() {
-  // If you never heard about Context API please visit https://reactjs.org/docs/context.html
+  /**
+   *
+   * If you never heard about Context API please visit https://reactjs.org/docs/context.html
+   * Fell free to ask me via P'pin
+   * Thank you.
+   *
+   */
+
   const { login, logout } = useAuth();
 
   // const [username, setUsername] = useState("");
