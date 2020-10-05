@@ -1,4 +1,5 @@
 import { AuthProvider } from "../contexts/auth";
+import Link from "next/link";
 
 /**
  *
@@ -8,6 +9,17 @@ import { AuthProvider } from "../contexts/auth";
 const App = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
+      <br />
+      <Link href="/one">One Page</Link>
+      <br />
+      <br />
+      <Link href="/two">Two Page</Link>
+      <br />
+      <br />
+      <Link href="/protected">Goto protected</Link>
+      <br />
+      <br />
+
       <Component {...pageProps} />
     </AuthProvider>
   );

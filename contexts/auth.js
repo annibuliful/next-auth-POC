@@ -18,20 +18,31 @@ import cookie from "js-cookie";
  *
  */
 
+const random = (pattern) =>
+  pattern.replace(/[x]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c == "x" || "X" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+
 const AuthContext = createContext({});
 
 // const API_URL = "http://localhost:3000";
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setAuthenticate] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     const token = cookie.get("token");
     if (token) {
       setAuthenticate(true);
+      setUserInfo({
+        username: "test-user",
+      });
     }
   }, []);
 
-  const login = async ({ username, password }) => {
+  const login = async () => {
     // const result = await fetch(`${API_URL}/login`, {
     //   method: "POST",
     //   headers: {
@@ -42,6 +53,9 @@ export const AuthProvider = ({ children }) => {
     // const response = await result.json();
     setAuthenticate(true);
     cookie.set("token", "JWT token");
+    setUserInfo({
+      username: "test-user",
+    });
   };
 
   const logout = async () => {
@@ -54,14 +68,14 @@ export const AuthProvider = ({ children }) => {
     // });
     // const response = await result.json();
     setAuthenticate(false);
+    setUserInfo(null);
     cookie.remove("token");
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: isAuthenticated, login, logout }}
+      value={{ isAuthenticated: isAuthenticated, login, logout, userInfo }}
     >
-      <p>{isAuthenticated ? "Loged" : ""}</p>
       {children}
     </AuthContext.Provider>
   );

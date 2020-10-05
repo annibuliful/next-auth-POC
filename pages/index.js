@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/auth";
+import Link from "next/link";
 
 export default function Home() {
   /**
@@ -29,7 +30,14 @@ export default function Home() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br /> */}
-      <button onClick={() => login({ username, password })}>Login</button>
+      <button
+        onClick={() => {
+          // login({ username, password })
+          login();
+        }}
+      >
+        Login
+      </button>
       <button onClick={(e) => logout()}>logout</button>
     </div>
   );
